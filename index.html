@@ -49,7 +49,7 @@
       <header class="topbar">
         <button class="mobile-menu" id="mobile-menu" aria-label="Open navigation">☰</button>
         <div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumb-current">Overview</strong></div>
-        <div class="top-actions"><span class="status-dot"></span><span class="top-status">All systems normal</span><button class="icon-button" aria-label="Notifications">♧<i></i></button><div class="top-avatar">V</div></div>
+        <div class="top-actions"><span class="status-dot"></span><span class="top-status">Preview mode</span><button class="icon-button" aria-label="Notifications">♧<i></i></button><div class="top-avatar">V</div></div>
       </header>
 
       <section class="view active" id="view-overview">
@@ -65,11 +65,11 @@
         <div class="server-grid" id="server-grid">
           <article class="server-card">
             <div class="server-cover cover-forest"><span class="cover-tag">JAVA EDITION</span><span class="cover-symbol">✧</span><div class="cover-landscape"></div></div>
-            <div class="server-card-body"><div class="server-title-row"><div><h3>Oakheart SMP</h3><p class="server-address">oakheart.sircarft.demo</p></div><span class="server-state"><i></i> Demo</span></div><div class="server-meta"><span>Survival</span><span>•</span><span>1–4 players</span><span class="meta-spacer"></span><span class="server-version">1.21.x</span></div><button class="server-open" data-server="Oakheart SMP">Open server details <span>→</span></button></div>
+            <div class="server-card-body"><div class="server-title-row"><div><h3>Oakheart SMP</h3><p class="server-address">Local preview · no IP assigned</p></div><span class="server-state"><i></i> Demo</span></div><div class="server-meta"><span>Survival</span><span>•</span><span>Preview only</span><span class="meta-spacer"></span><span class="server-version">1.21.x</span></div><button class="server-open" data-server="Oakheart SMP">View world record <span>→</span></button></div>
           </article>
           <article class="server-card">
             <div class="server-cover cover-stone"><span class="cover-tag">BEDROCK EDITION</span><span class="cover-symbol">⌁</span><div class="cover-landscape"></div></div>
-            <div class="server-card-body"><div class="server-title-row"><div><h3>Moonlit Keep</h3><p class="server-address">moonlit.sircarft.demo</p></div><span class="server-state"><i></i> Demo</span></div><div class="server-meta"><span>Creative</span><span>•</span><span>1–4 players</span><span class="meta-spacer"></span><span class="server-version">1.21.x</span></div><button class="server-open" data-server="Moonlit Keep">Open server details <span>→</span></button></div>
+            <div class="server-card-body"><div class="server-title-row"><div><h3>Moonlit Keep</h3><p class="server-address">Local preview · no IP assigned</p></div><span class="server-state"><i></i> Demo</span></div><div class="server-meta"><span>Creative</span><span>•</span><span>Preview only</span><span class="meta-spacer"></span><span class="server-version">1.21.x</span></div><button class="server-open" data-server="Moonlit Keep">View world record <span>→</span></button></div>
           </article>
         </div>
         <div class="bottom-grid">
@@ -94,9 +94,25 @@
         <label for="world-name">WORLD NAME</label><input id="world-name" maxlength="24" placeholder="e.g. The Greenwilds" required>
         <label>CHOOSE YOUR EDITION</label><div class="choice-row"><label class="choice selected"><input type="radio" name="edition" value="Java" checked><b>JAVA</b><small>PC players</small></label><label class="choice"><input type="radio" name="edition" value="Bedrock"><b>BEDROCK</b><small>Mobile & console</small></label></div>
         <label>HOW WILL YOU PLAY?</label><select id="world-mode"><option>Survival</option><option>Creative</option><option>Adventure</option></select>
-        <div class="demo-notice">This creates a local dashboard demo only. It does not start a real Minecraft server.</div>
-        <button class="primary-button full-button" type="submit">Create demo world <span>↗</span></button>
+        <div class="demo-notice">Local preview only. Real hosting is not connected to this browser.</div>
+        <button class="primary-button full-button" type="submit">Create preview world <span>↗</span></button>
       </form>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="server-details-modal" aria-hidden="true">
+    <div class="create-modal detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-name">
+      <button class="modal-close" id="detail-close" aria-label="Close">×</button>
+      <div class="eyebrow">WORLD RECORD / PREVIEW</div>
+      <h2 id="detail-name">World name</h2>
+      <p class="muted">This is a saved dashboard record, not a running Minecraft server.</p>
+      <div class="detail-grid">
+        <div><span>EDITION</span><strong id="detail-edition">Java Edition</strong></div>
+        <div><span>GAME MODE</span><strong id="detail-mode">Survival</strong></div>
+        <div><span>STATUS</span><strong id="detail-status">Not provisioned</strong></div>
+        <div><span>CONNECTION</span><strong id="detail-address">No IP address assigned</strong></div>
+      </div>
+      <div class="demo-notice">A separate API can store a provisioning request, but this dashboard is not connected to it yet. A reviewed runtime worker and hosting machine are still required before a world can go online.</div>
+      <button class="primary-button full-button" id="detail-close-action" type="button">Back to worlds</button>
     </div>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
