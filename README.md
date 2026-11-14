@@ -7,12 +7,14 @@ A mobile-first Minecraft server-hosting dashboard concept with a dark forest, st
 - Responsive dashboard with mobile navigation
 - Overview, server list, world library, plan preview and settings screens
 - Java / Bedrock selection and Survival / Creative / Adventure presets
-- Browser-session demo server creation
+- Demo server creation with browser-local persistence (localStorage)
+- Safe text rendering for user-entered world names
+- Keyboard-friendly modal dismissal (Escape)
 - No external libraries required at runtime (Google Fonts are optional)
 
 ## Important status
 
-This is a **front-end prototype only**. The sample servers and quota are illustrative. Creating a world adds a local card in the current browser session; it does not provision a Minecraft server.
+This is a **front-end prototype only**. The sample servers and quota are illustrative. Creating a world saves a local demo card in that browser's localStorage, so it remains after refresh on the same browser. It does not provision a Minecraft server.
 
 Not implemented: account registration, authentication, persistent database, payments, real server provisioning, console access, backups, monitoring or Java/Bedrock networking.
 
