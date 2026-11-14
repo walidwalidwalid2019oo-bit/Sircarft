@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101712">
+  <meta name="description" content="Sircarft — your world, your rules. A Minecraft server hosting dashboard concept.">
+  <title>Sircarft — Your world, your rules</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="Sircarft home">
+        <span class="brand-mark"><span></span><span></span><span></span><span></span></span>
+        <span>SIR<span>CARFT</span><small>WORLDS BEYOND</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-view="overview"><span class="nav-icon">⌂</span> Overview</button>
+        <button class="nav-link" data-view="servers"><span class="nav-icon">▦</span> My servers <b class="nav-count" id="server-count">2</b></button>
+        <button class="nav-link" data-view="worlds"><span class="nav-icon">◈</span> World library</button>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <div class="workspace-label">MANAGE</div>
+      <nav class="main-nav">
+        <button class="nav-link" data-view="billing"><span class="nav-icon">◇</span> Plan & usage</button>
+        <button class="nav-link" data-view="settings"><span class="nav-icon">⚙</span> Settings</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="realm-card">
+          <div class="realm-emblem">✦</div>
+          <strong>Your next world awaits.</strong>
+          <p>Build a place for your crew to call home.</p>
+          <button class="text-button" id="realm-create">Create a world <span>↗</span></button>
+        </div>
+        <div class="profile-row">
+          <div class="avatar">V</div>
+          <div><strong>World Keeper</strong><small>Free explorer plan</small></div>
+          <span class="profile-dots">•••</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" aria-label="Open navigation">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumb-current">Overview</strong></div>
+        <div class="top-actions"><span class="status-dot"></span><span class="top-status">All systems normal</span><button class="icon-button" aria-label="Notifications">♧<i></i></button><div class="top-avatar">V</div></div>
+      </header>
+
+      <section class="view active" id="view-overview">
+        <div class="welcome-row">
+          <div><div class="eyebrow"><span class="eyebrow-line"></span> THE REALM IS YOURS</div><h1>Make room for <em>adventure.</em></h1><p class="muted">Your worlds, your people, your rules. Welcome back.</p></div>
+          <button class="primary-button" id="new-server"><span>＋</span> Create a server</button>
+        </div>
+        <div class="hero-panel">
+          <div class="hero-copy"><div class="hero-kicker">SIRCARFT / FIELD NOTES 001</div><h2>Every great story<br>starts with a <em>world.</em></h2><p>Gather your crew. Choose your edition. The first block is yours to place.</p><button class="hero-button" id="hero-create">Start building <span>↗</span></button></div>
+          <div class="hero-art" aria-hidden="true"><div class="sun"></div><div class="mountain mountain-back"></div><div class="mountain mountain-front"></div><div class="pine pine-one">♠</div><div class="pine pine-two">♠</div><div class="pixel-castle">▥</div><div class="hero-ground"></div><div class="hero-coordinates">SECTOR 01 · OVERWORLD</div></div>
+        </div>
+        <div class="section-heading"><div><div class="eyebrow">YOUR CORNER OF THE WORLD</div><h2>Recent servers <span class="heading-count">02</span></h2></div><button class="quiet-button" data-goto="servers">View all servers <span>→</span></button></div>
+        <div class="server-grid" id="server-grid">
+          <article class="server-card">
+            <div class="server-cover cover-forest"><span class="cover-tag">JAVA EDITION</span><span class="cover-symbol">✧</span><div class="cover-landscape"></div></div>
+            <div class="server-card-body"><div class="server-title-row"><div><h3>Oakheart SMP</h3><p class="server-address">oakheart.sircarft.demo</p></div><span class="server-state"><i></i> Demo</span></div><div class="server-meta"><span>Survival</span><span>•</span><span>1–4 players</span><span class="meta-spacer"></span><span class="server-version">1.21.x</span></div><button class="server-open" data-server="Oakheart SMP">Open server details <span>→</span></button></div>
+          </article>
+          <article class="server-card">
+            <div class="server-cover cover-stone"><span class="cover-tag">BEDROCK EDITION</span><span class="cover-symbol">⌁</span><div class="cover-landscape"></div></div>
+            <div class="server-card-body"><div class="server-title-row"><div><h3>Moonlit Keep</h3><p class="server-address">moonlit.sircarft.demo</p></div><span class="server-state"><i></i> Demo</span></div><div class="server-meta"><span>Creative</span><span>•</span><span>1–4 players</span><span class="meta-spacer"></span><span class="server-version">1.21.x</span></div><button class="server-open" data-server="Moonlit Keep">Open server details <span>→</span></button></div>
+          </article>
+        </div>
+        <div class="bottom-grid">
+          <div class="info-panel"><div class="panel-icon">✦</div><div><div class="eyebrow">THE SIRCARFT PROMISE</div><h3>Small worlds. Big memories.</h3><p>Start with a free, limited world. Invite your friends and build something worth returning to.</p></div></div>
+          <div class="usage-panel"><div class="usage-top"><div><div class="eyebrow">PLAN OVERVIEW</div><h3>Explorer</h3></div><span class="plan-pill">FREE</span></div><div class="usage-bar"><span></span></div><div class="usage-foot"><span>Demo quota preview</span><strong>1 / 2 slots</strong></div><p class="fine-print">Illustrative only — no hosting resources are provisioned yet.</p></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-servers"><div class="page-heading"><div class="eyebrow">YOUR WORLDS</div><h1>My servers</h1><p class="muted">The places where your stories happen.</p></div><div class="server-grid" id="all-server-grid"></div></section>
+      <section class="view" id="view-worlds"><div class="page-heading"><div class="eyebrow">FIND YOUR STARTING POINT</div><h1>World library</h1><p class="muted">Pick a play style. Your world can become anything.</p></div><div class="library-grid"><article class="library-card"><span>01 / SURVIVAL</span><h2>Wild frontier</h2><p>Gather, explore and make a home with your crew.</p><button class="text-button library-create" data-mode="Survival">Use this world ↗</button></article><article class="library-card library-night"><span>02 / CREATIVE</span><h2>Open canvas</h2><p>No limits to the ideas you can build together.</p><button class="text-button library-create" data-mode="Creative">Use this world ↗</button></article><article class="library-card library-ruins"><span>03 / ADVENTURE</span><h2>Ancient echoes</h2><p>Make a map full of quests, secrets and surprises.</p><button class="text-button library-create" data-mode="Adventure">Use this world ↗</button></article></div></section>
+      <section class="view" id="view-billing"><div class="page-heading"><div class="eyebrow">KEEP IT UNDER CONTROL</div><h1>Plan & usage</h1><p class="muted">A clear look at the limits of your current demo plan.</p></div><div class="usage-large"><div><span class="plan-pill">FREE EXPLORER</span><h2>Start small. Grow together.</h2><p>This is a visual plan preview. Real server quotas, billing and payments are not connected.</p></div><div class="quota-list"><div><span>Server slots</span><strong>1 / 2</strong></div><div><span>Memory allocation</span><strong>Demo only</strong></div><div><span>Backups</span><strong>Not connected</strong></div></div></div></section>
+      <section class="view" id="view-settings"><div class="page-heading"><div class="eyebrow">YOUR WORKSPACE</div><h1>Settings</h1><p class="muted">Preferences for this local dashboard preview.</p></div><div class="settings-card"><div><h3>Workspace name</h3><p>How your workspace appears in the dashboard.</p></div><input value="World Keeper" aria-label="Workspace name" disabled><div class="settings-note">Account profiles and secure sign-in will be added with the backend.</div></div></section>
+      <footer class="footer"><span>© 2026 SIRCARFT</span><span>MADE FOR THE NEXT ADVENTURE <b>✦</b></span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="create-modal" aria-hidden="true">
+    <div class="create-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+      <div class="eyebrow">NEW WORLD / SETUP</div><h2 id="modal-title">Name your <em>world.</em></h2><p class="muted">A little beginning for a very big adventure.</p>
+      <form id="create-form">
+        <label for="world-name">WORLD NAME</label><input id="world-name" maxlength="24" placeholder="e.g. The Greenwilds" required>
+        <label>CHOOSE YOUR EDITION</label><div class="choice-row"><label class="choice selected"><input type="radio" name="edition" value="Java" checked><b>JAVA</b><small>PC players</small></label><label class="choice"><input type="radio" name="edition" value="Bedrock"><b>BEDROCK</b><small>Mobile & console</small></label></div>
+        <label>HOW WILL YOU PLAY?</label><select id="world-mode"><option>Survival</option><option>Creative</option><option>Adventure</option></select>
+        <div class="demo-notice">This creates a local dashboard demo only. It does not start a real Minecraft server.</div>
+        <button class="primary-button full-button" type="submit">Create demo world <span>↗</span></button>
+      </form>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
