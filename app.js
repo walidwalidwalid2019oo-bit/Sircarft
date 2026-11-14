@@ -38,16 +38,37 @@ document.querySelectorAll(".nav-link").forEach(b=>b.addEventListener("click",()=
 document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.goto)));
 $("mobile-menu").addEventListener("click",()=>$("sidebar").classList.toggle("open"));
 const modal=$("create-modal");
+const detailModal=$("server-details-modal");
 function openModal(mode){modal.classList.add("open");modal.setAttribute("aria-hidden","false");if(mode)$("world-mode").value=mode;setTimeout(()=>$("world-name").focus(),80)}
 function closeModal(){modal.classList.remove("open");modal.setAttribute("aria-hidden","true")}
+function closeDetails(){detailModal.classList.remove("open");detailModal.setAttribute("aria-hidden","true")}
+function openServerDetails(name){
+  const server=servers.find(item=>item.name===name);
+  if(!server)return;
+  $("detail-name").textContent=server.name;
+  $("detail-edition").textContent=server.edition+" Edition";
+  $("detail-mode").textContent=server.mode;
+  $("detail-status").textContent="Not provisioned";
+  $("detail-address").textContent="No IP address assigned";
+  detailModal.classList.add("open");
+  detailModal.setAttribute("aria-hidden","false");
+  $("detail-close").focus();
+}
 ["new-server","realm-create","hero-create"].forEach(id=>$(id).addEventListener("click",()=>openModal()));
 $("modal-close").addEventListener("click",closeModal);
 modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal.classList.contains("open"))closeModal()});
+$("detail-close").addEventListener("click",closeDetails);
+$("detail-close-action").addEventListener("click",closeDetails);
+detailModal.addEventListener("click",e=>{if(e.target===detailModal)closeDetails()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(modal.classList.contains("open"))closeModal();if(detailModal.classList.contains("open"))closeDetails()}});
+document.addEventListener("click",e=>{
+  const trigger=e.target.closest("[data-server]");
+  if(trigger)openServerDetails(trigger.dataset.server);
+});
 document.querySelectorAll('input[name="edition"]').forEach(input=>input.addEventListener("change",()=>{document.querySelectorAll(".choice").forEach(c=>c.classList.toggle("selected",c.contains(input)&&input.checked))}));
 document.querySelectorAll(".library-create").forEach(b=>b.addEventListener("click",()=>openModal(b.dataset.mode)));
-function card(server){return `<article class="server-card"><div class="server-cover ${server.edition==="Java"?"cover-forest":"cover-stone"}"><span class="cover-tag">${server.edition.toUpperCase()} EDITION</span><span class="cover-symbol">✧</span><div class="cover-landscape"></div></div><div class="server-card-body"><div class="server-title-row"><div><h3>${escapeHtml(server.name)}</h3><p class="server-address">local-demo.sircarft</p></div><span class="server-state"><i></i> Demo</span></div><div class="server-meta"><span>${server.mode}</span><span>•</span><span>Local preview</span><span class="meta-spacer"></span><span class="server-version">1.21.x</span></div><button class="server-open" data-server="${escapeHtml(server.name)}">Open server details <span>→</span></button></div></article>`}
+function card(server){return \`<article class="server-card"><div class="server-cover \${server.edition==="Java"?"cover-forest":"cover-stone"}"><span class="cover-tag">\${server.edition.toUpperCase()} EDITION</span><span class="cover-symbol">✧</span><div class="cover-landscape"></div></div><div class="server-card-body"><div class="server-title-row"><div><h3>\${escapeHtml(server.name)}</h3><p class="server-address">Local preview · no IP assigned</p></div><span class="server-state"><i></i> Demo</span></div><div class="server-meta"><span>\${server.mode}</span><span>•</span><span>Preview only</span><span class="meta-spacer"></span><span class="server-version">1.21.x</span></div><button class="server-open" data-server="\${escapeHtml(server.name)}">View world record <span>→</span></button></div></article>\`}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function renderServers(){const html=servers.map(card).join("");$("all-server-grid").innerHTML=html;$("server-grid").innerHTML=html;$("server-count").textContent=servers.length;document.querySelectorAll("[data-server]").forEach(b=>b.addEventListener("click",()=>showToast(b.dataset.server+" is a visual demo — real hosting is not connected.")))}
-$("create-form").addEventListener("submit",e=>{e.preventDefault();const name=$("world-name").value.trim();if(!name)return;const edition=document.querySelector('input[name="edition"]:checked').value;servers.push({name:name.slice(0,24),edition,mode:$("world-mode").value});const persisted=persistServers();renderServers();$("create-form").reset();document.querySelectorAll(".choice").forEach((c,i)=>c.classList.toggle("selected",i===0));closeModal();go("servers");showToast(persisted?"Demo world saved in this browser. No server is running.":"Demo world added for this session; browser storage is unavailable.")});
+function renderServers(){const html=servers.map(card).join("");$("all-server-grid").innerHTML=html;$("server-grid").innerHTML=html;$("server-count").textContent=servers.length;}
+$("create-form").addEventListener("submit",e=>{e.preventDefault();const name=$("world-name").value.trim();if(!name)return;if(servers.some(server=>server.name.toLocaleLowerCase()===name.toLocaleLowerCase())){showToast("A world with that name already exists.");return;}const edition=document.querySelector('input[name="edition"]:checked').value;servers.push({name:name.slice(0,24),edition,mode:$("world-mode").value});const persisted=persistServers();renderServers();$("create-form").reset();document.querySelectorAll(".choice").forEach((c,i)=>c.classList.toggle("selected",i===0));closeModal();go("servers");showToast(persisted?"Local preview saved in this browser. No server is running.":"Preview added for this session; browser storage is unavailable.")});
 renderServers();
