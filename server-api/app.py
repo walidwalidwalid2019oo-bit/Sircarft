@@ -60,7 +60,12 @@ def require_owner(
             detail="A bearer token is required.",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    if not hmac.compare_digest(credentials.credentials, expected):
+    # HTTP bearer credentials may contain non-ASCII input. compare_digest(str, str)
+    # rejects non-ASCII strings with TypeError; UTF-8 bytes keep the comparison safe
+    # and ensure malformed credentials are rejected as 401 rather than 500.
+    supplied = credentials.credentials.encode("utf-8")
+    configured = expected.encode("utf-8")
+    if not hmac.compare_digest(supplied, configured):
         raise HTTPException(
             status_code=401,
             detail="Invalid bearer token.",
