@@ -111,3 +111,10 @@ def test_create_rejects_blank_world_name(client):
         json=create_payload("   "),
     )
     assert response.status_code == 422
+
+def test_non_ascii_bearer_token_is_rejected_as_unauthorized(client):
+    # Pass raw header bytes: HTTPX encodes string header values as ASCII before
+    # the request reaches Starlette, while HTTP field values can contain obs-text.
+    response = client.get("/v1/servers", headers={b"Authorization": b"Bearer invalid-token-\xff"})
+    assert response.status_code == 401
+    assert response.json()["detail"] == "Invalid bearer token."
